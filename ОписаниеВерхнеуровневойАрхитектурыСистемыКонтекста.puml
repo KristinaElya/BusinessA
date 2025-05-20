@@ -1,0 +1,21 @@
+@startuml
+!define C4P https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master
+!includeurl C4P/C4_Context.puml
+
+Person(customer, "Клиент", "Покупатель товаров ручной работы")
+Person(seller, "Продавец", "Продавец уникальных и ручных товаров")
+System_Ext(payment_gateway, "Платежный шлюз", "Обеспечивает обработку платежей")
+System_Ext(shipping_service, "Служба доставки", "Обеспечивает доставку товаров")
+System_Ext(email_service, "Email-сервис", "Отправка уведомлений и сообщений")
+
+System(system, "Платформа продаж ручной работы", "Система для продавцов и покупателей товаров ручной работы")
+
+Rel(seller, system, "Управление товарами, карточками, запасами")
+Rel(customer, system, "Просмотр товаров, отправка сообщений")
+Rel(system, customer, "Отображение товаров и уведомлений")
+Rel(system, seller, "Управление карточками и запасами")
+Rel(system, payment_gateway, "Обработка платежей")
+Rel(system, shipping_service, "Интеграция с доставкой")
+Rel(system, email_service, "Отправка уведомлений")
+
+@enduml
