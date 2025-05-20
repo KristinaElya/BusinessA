@@ -1,0 +1,25 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System_Boundary(system, "Платформа продаж ручной работы") {
+
+  Container(web_app, "Веб-приложение", "React/Vue/Angular", "Интерфейс для продавцов и покупателей.")
+  Container(api_gateway, "API Gateway", "Node.js / Spring Boot / .NET", "Маршрутизация API-запросов и балансировка нагрузки.")
+  Container(auth_service, "Сервис авторизации", "OAuth2 / JWT", "Обеспечивает аутентификацию и авторизацию пользователей.")
+  Container(business_logic, "Бизнес-логика", "Java/Python/Node.js", "Обработка бизнес-процессов, управление карточками товаров, запасами и заказами.")
+  Container(notification_service, "Сервис уведомлений", "", "Отправка email/SMS/Push уведомлений.")
+  Container(payment_service, "Платежный сервис", "", "Интеграция с платежными системами (Stripe, PayPal).")
+  Container(shipping_service, "Служба доставки", "", "Интеграция с логистическими компаниями для доставки.")
+  Container(database, "База данных", "PostgreSQL / MySQL / MongoDB", "Хранение данных о пользователях, товарах, заказах и сообщениях.")
+
+}
+
+Rel(web_app, api_gateway, "HTTP/HTTPS")
+Rel(api_gateway, auth_service, "Auth API")
+Rel(api_gateway, business_logic, "API вызовы")
+Rel(business_logic, database, "Доступ к данным")
+Rel(business_logic, payment_service, "Обработка платежей")
+Rel(business_logic, shipping_service, "Обработка логистики")
+Rel(business_logic, notification_service, "Отправка уведомлений")
+
+@enduml
